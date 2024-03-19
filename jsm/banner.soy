@@ -1,0 +1,18 @@
+{namespace JIRA.Templates.Banner}
+
+/**
+ * Render recovery mode warning.
+ * @param helpUrl the URL of the websudo help.
+ * @param isAdmin true when the current user is an admin.
+ * @param isRecoveryAdmin true when the current use is the `recovery admin`.
+ */
+{template .recoveryBanner}
+    {let $help}<a target="_blank" href="{$helpUrl}">{/let}
+    {let $end}</a>{/let}
+    {call aui.message.warning}
+        {param content}
+            {if $isRecoveryAdmin}
+                {getText('jira.recoverymode.recovery.banner', $help, $end)|noAutoescape}
+            {elseif $isAdmin}
+                {getText('jira.recoverymode.admin.banner', $help, $end)|noAutoescape}
+            {/if
